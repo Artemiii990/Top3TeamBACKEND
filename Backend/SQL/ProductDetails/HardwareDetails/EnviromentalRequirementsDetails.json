@@ -1,0 +1,19 @@
+{
+  "MacBook Neo": {
+    "lineVoltage": "від 100 до 240 В ~",
+
+    "frequency": "від 50 до 60 Гц",
+
+    "operationTemperature": "від 10 до 35 °C",
+
+    "storageTemperature": "від –25 до 45 °C",
+
+    "humidity": "від 0 до 90% без конденсації",
+
+    "operatingAltitude": "протестовано до 3000 м",
+
+    "maxStorageHeight": "4500 м",
+
+    "maxTransportationHeight": "10 500 м"
+  }
+}
