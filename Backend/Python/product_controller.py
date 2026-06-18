@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 
-import models.product
+from dtos.user_response import *
 
 from sqlalchemy import create_engine, String, Integer, MetaData, Table, select
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session
@@ -51,8 +51,8 @@ app.add_middleware(
 
 
 
-@app.get("/products/get", tags=["Products"])
-async def get_products():
+@app.get("/admin/products/get", tags=["Admin"])
+async def get_products_admin():
   with engine.connect() as connection:
     result = connection.execute(select(products))
 
@@ -60,8 +60,30 @@ async def get_products():
 
 
 
-@app.get("/products/get/{product_name}", tags=["Products"])
-async def get_product_by_name(product_name: str):
+@app.get("/admin/products/get/{product_name}", tags=["Admin"])
+async def get_product_by_name_admin(product_name: str):
+  with engine.connect() as connection:
+    product = select(products).where(products.c.ProductName.ilike(f"%{product_name}%"))
+
+    result = connection.execute(product)
+
+    return result.mappings().all()
+
+
+
+
+
+@app.get("/user/products/get", response_model=list[ProductUserResponse], tags=["User"])
+async def get_products_user():
+  with engine.connect() as connection:
+    result = connection.execute(select(products))
+
+    return result.mappings().all()
+
+
+
+@app.get("/user/products/get/{product_name}", response_model=list[ProductUserResponse], tags=["User"])
+async def get_product_by_name_user(product_name: str):
   with engine.connect() as connection:
     product = select(products).where(products.c.ProductName.ilike(f"%{product_name}%"))
 

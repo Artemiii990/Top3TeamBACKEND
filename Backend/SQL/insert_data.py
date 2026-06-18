@@ -182,7 +182,7 @@ operating_system = next(iter(os_data.keys()))
 
 # colors
 colors_amount = len(color_data.get(product_key))
-colors_names = " ".join(color_data.get(product_key))
+colors_names = ", ".join(color_data.get(product_key))
 
 
 # materials
@@ -194,7 +194,7 @@ materials_names = json_to_str(materials_data[product_key]["names"])
 description = description_data.get(product_key)
 
 
-# function
+# functions
 handoff = any(
   func.get("handoff")
   for func in functions_data.values()
