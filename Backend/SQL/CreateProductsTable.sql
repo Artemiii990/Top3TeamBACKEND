@@ -1,5 +1,7 @@
-USE AppleUADB
+CREATE DATABASE AppleUADB;
 
+
+USE AppleUADB
 
 
 CREATE TABLE Products
@@ -72,6 +74,6 @@ CREATE TABLE Products
     TouchID BIT NULL,
 
 
-    Availability NVARCHAR(MAX) NULL,
-    KitComponents NVARCHAR(MAX) NULL,
+    AvailabilityDetails NVARCHAR(MAX) NULL,
+    KitComponents NVARCHAR(MAX) NULL
 );
