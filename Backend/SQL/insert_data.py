@@ -70,9 +70,13 @@ wireless_data = load_json(os.path.join(hardware, "WirelessCommunicationDetails.j
 ai_data   = load_json(os.path.join(software, "AppleIntelligenceDetails.json"))
 apps_data = load_json(os.path.join(software, "DownloadedAppsDetails.json"))
 os_data   = load_json(os.path.join(software, "OperatingSystemDetails.json"))
+functions_data = load_json(os.path.join(software, "FunctionsDetails.json"))
 
+description_data = load_json(os.path.join(general, "Description.json"))
 availability_data = load_json(os.path.join(general, "AvailabilityDetails.json"))
 kit_data = load_json(os.path.join(general, "KitComponentsDetails.json"))
+color_data = load_json(os.path.join(general, "ColorsDetails.json"))
+materials_data = load_json(os.path.join(general, "MaterialDetails.json"))
 
 
 product_key = "MacBook Neo"
@@ -111,7 +115,7 @@ ram_key, ram_info = next(iter(ram_data.items()))
 ram = extract_int(ram_key)
 ram_details = json_to_str(ram_info)
 
-storage_key, _ = next(iter(storage_data.items()))
+storage_key = next(iter(storage_data.keys()))
 storage = extract_int(storage_key)
 storage_details = json_to_str(storage_data)
 
@@ -176,16 +180,36 @@ downloaded_apps = ", ".join(apps_data["default"])
 operating_system = next(iter(os_data.keys()))
 
 
-# to-do
+# colors
+colors_amount = len(color_data.get(product_key))
+colors_names = " ".join(color_data.get(product_key))
+
+
+# materials
+materials_details = json_to_str(materials_data.get(product_key))
+materials_names = json_to_str(materials_data[product_key]["names"])
+
+
+# description
+description = description_data.get(product_key)
+
+
+# function
+handoff = any(
+  func.get("handoff")
+  for func in functions_data.values()
+  if isinstance(func, dict)
+)
+
+instant_hotspot = any(
+  func.get("instantHotspot")
+  for func in functions_data.values()
+  if isinstance(func, dict)
+)
+
+
+# product name
 product_name = product_key
-description = None
- 
-colors_amount = 0    # TODO: ColorsDetails.json
-color_names = ""   # TODO: ColorsDetails.json
-material = ""   # TODO: MaterialDetails.json или прописать вручную
- 
-handoff = None
-instant_hotspot = None
 
 
 
@@ -200,7 +224,7 @@ cursor.execute("""
         RAM, RAMDetails,
         Storage, StorageDetails,
         PixelsAmount, ColorsSupported,
-        Material,
+        MaterialsDetails, MaterialsNames,
         Chip, ChipDetails,
         CameraResolution, CameraDetails,
         SpeakersAmount,
@@ -217,19 +241,19 @@ cursor.execute("""
         DolbyAtmos, Handoff, InstantHotspot, TouchID,
         AvailabilityDetails, KitComponents
     ) VALUES (
-        ?,?,  ?,?,  ?,?,  ?,?,?,?,  ?,  ?,?,  ?,?,  ?,?,  ?,
+        ?,?,  ?,?,  ?,?,  ?,?,?,?,  ?,  ?,?,  ?,?,  ?,?,  ?,?,
         ?,?,  ?,?,  ?,  ?,?,  ?,  ?,?,  ?,?,  ?,?,?,?,  ?,?,  ?,?,  ?,?,?,?,  ?,?
     )
 """,
     product_name, description,
-    colors_amount, color_names,
+    colors_amount, colors_names,
     battery_hours, battery_details,
     display_name, display_inches, display_brightness, display_details,
     external_displays_details,
     ram, ram_details,
     storage, storage_details,
     pixels_amount, colors_supported,
-    material,
+    materials_details, materials_names,
     chip_name, chip_details,
     camera_resolution, camera_details,
     speakers_amount,
@@ -243,11 +267,11 @@ cursor.execute("""
     wireless_details,
     apple_intelligence, apple_intelligence_details,
     downloaded_apps, operating_system,
-    1 if dolby_atmos else 0, handoff, instant_hotspot, 1 if touch_id else 0,
+    1 if dolby_atmos else 0, handoff, instant_hotspot, touch_id,
     availability_details, kit_components
 )
  
 connection.commit()
 connection.close()
- 
-print(f"Product '{product_name}' successfully added to the database!")
+
+print(f"Product '{product_name}' successfully added to the database")

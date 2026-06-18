@@ -1,4 +1,5 @@
 CREATE DATABASE AppleUADB;
+GO
 
 
 USE AppleUADB
@@ -33,7 +34,8 @@ CREATE TABLE Products
     PixelsAmount INT NOT NULL,
     ColorsSupported INT NULL,
 
-    Material NVARCHAR(50) NOT NULL,
+    MaterialsDetails NVARCHAR(MAX) NOT NULL,
+    MaterialsNames NVARCHAR(MAX) NOT NULL,
 
     Chip NVARCHAR(50) NOT NULL,
     ChipDetails NVARCHAR(MAX) NULL,

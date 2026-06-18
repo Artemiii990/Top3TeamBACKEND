@@ -4,7 +4,7 @@
 
     "details": "78 (ANSI) або 79 (ISO) клавіш, включно з 12 повно­роз­мірними функціо­наль­ними клавішами",
 
-    "touchId": "",
+    "touchId": 0,
 
     "multiTouch": "Трекпед Multi-Touch для точного керування курсором і розпізна­вання жестів"
   },
@@ -13,7 +13,7 @@
   "Magic Keyboard Touch ID": {
     "name": "Клавіатура Magic Keyboard із Touch ID",
 
-    "touchId": "Touch ID",
+    "touchId": 1,
 
     "multiTouch": "Трекпед Multi-Touch для точного керування курсором і розпізна­вання жестів"
   }
