@@ -1,12 +1,12 @@
 from fastapi import Depends, APIRouter
 
-from dtos.user_response import *
-from authentication import get_current_admin
+from Backend.Python.dtos.products.product_user_response import *
+from Backend.Python.services.authentication import get_current_admin
 
 from sqlalchemy import select
 
-from database import engine
-from tables import products
+from Backend.Python.sql.database import engine
+from Backend.Python.sql.tables import products
 
 
 
