@@ -1,7 +1,3 @@
-CREATE DATABASE AppleUADB;
-GO
-
-
 USE AppleUADB
 
 

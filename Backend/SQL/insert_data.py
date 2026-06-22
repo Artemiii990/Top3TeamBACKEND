@@ -7,6 +7,8 @@ import re
 
 
 
+
+
 # functions
 def load_json(path: str) -> dict:
   with open(path, encoding="utf-8") as file:
@@ -79,7 +81,7 @@ color_data = load_json(os.path.join(general, "ColorsDetails.json"))
 materials_data = load_json(os.path.join(general, "MaterialDetails.json"))
 
 
-product_key = "MacBook Neo"
+PRODUCT_KEY = "MacBook Neo"
 
 
 
@@ -89,7 +91,7 @@ chip_details = json_to_str(chip_info)
 
 
 # battery
-battery_info = battery_data[product_key]
+battery_info = battery_data[PRODUCT_KEY]
 battery_hours = extract_int(battery_info["broadcastingTime"])
 battery_details = json_to_str(battery_info)
 cables_amount = 1
@@ -143,8 +145,8 @@ ports = ", ".join(ports_data.keys())
 
 
 # dimentions & enviroment
-dimensions_details = json_to_str(dimensions_data[product_key])
-enviroment_details = json_to_str(enviromental_data[product_key])
+dimensions_details = json_to_str(dimensions_data[PRODUCT_KEY])
+enviroment_details = json_to_str(enviromental_data[PRODUCT_KEY])
 
 
 # keyboard & trackpad
@@ -162,8 +164,8 @@ wireless_details = json_to_str(wireless_data)
 
 
 # software
-availability_details = json_to_str(availability_data[product_key])
-kit_components = json_to_str(kit_data[product_key])
+availability_details = json_to_str(availability_data[PRODUCT_KEY])
+kit_components = json_to_str(kit_data[PRODUCT_KEY])
 
 
 # apple intelligence
@@ -181,17 +183,17 @@ operating_system = next(iter(os_data.keys()))
 
 
 # colors
-colors_amount = len(color_data.get(product_key))
-colors_names = ", ".join(color_data.get(product_key))
+colors_amount = len(color_data.get(PRODUCT_KEY))
+colors_names = ", ".join(color_data.get(PRODUCT_KEY))
 
 
 # materials
-materials_details = json_to_str(materials_data.get(product_key))
-materials_names = json_to_str(materials_data[product_key]["names"])
+materials_details = json_to_str(materials_data.get(PRODUCT_KEY))
+materials_names = json_to_str(materials_data[PRODUCT_KEY]["names"])
 
 
 # description
-description = description_data.get(product_key)
+description = description_data.get(PRODUCT_KEY)
 
 
 # functions
@@ -209,7 +211,7 @@ instant_hotspot = any(
 
 
 # product name
-product_name = product_key
+product_name = PRODUCT_KEY
 
 
 
