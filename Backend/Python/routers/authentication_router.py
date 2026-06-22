@@ -1,13 +1,13 @@
 from fastapi import APIRouter, HTTPException, status
 from sqlalchemy import select
 
-from Backend.Python.dtos.authentication.response_token import Token
-from Backend.Python.dtos.authentication.input_dto import UserLogin
+from dtos.authentication.response_token import Token
+from dtos.authentication.input_dto import UserLogin
 
-from Backend.Python.services.authentication import verify_password, create_access_token
+from services.authentication import verify_password, create_access_token
 
-from Backend.Python.sql.database import engine
-from Backend.Python.sql.tables import users
+from sql.database import engine
+from sql.tables import users
 
 
 

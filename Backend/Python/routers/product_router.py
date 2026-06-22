@@ -1,18 +1,18 @@
 from fastapi import Depends, APIRouter
 
-from Backend.Python.dtos.products.product_user_response import *
-from Backend.Python.services.authentication import get_current_admin
+from dtos.products.product_user_response import *
+from services.authentication import get_current_admin
 
 from sqlalchemy import select
 
-from Backend.Python.sql.database import engine
-from Backend.Python.sql.tables import products
+from sql.database import engine
+from sql.tables import products
 
 
 
 
 
-product_router = APIRouter(tags=["Products"])
+product_router = APIRouter()
 
 
 

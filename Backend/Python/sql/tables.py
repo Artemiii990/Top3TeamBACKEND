@@ -1,5 +1,5 @@
 from sqlalchemy import Table
-from Backend.Python.sql.database import engine, metadata
+from sql.database import engine, metadata
 
 
 
