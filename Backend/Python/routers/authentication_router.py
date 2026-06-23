@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, status
 from sqlalchemy import select
 
-from dtos.authentication.response_token import Token
+from dtos.authentication.token_response import Token
 from dtos.authentication.input_dto import UserLogin
 
 from services.authentication import verify_password, create_access_token

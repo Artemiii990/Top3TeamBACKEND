@@ -69,9 +69,9 @@ enviromental_data = load_json(os.path.join(hardware, "EnviromentalRequirementsDe
 keyboard_data = load_json(os.path.join(hardware, "KeyboardAndTrackpadDetails.json"))
 wireless_data = load_json(os.path.join(hardware, "WirelessCommunicationDetails.json"))
 
-ai_data   = load_json(os.path.join(software, "AppleIntelligenceDetails.json"))
+ai_data = load_json(os.path.join(software, "AppleIntelligenceDetails.json"))
 apps_data = load_json(os.path.join(software, "DownloadedAppsDetails.json"))
-os_data   = load_json(os.path.join(software, "OperatingSystemDetails.json"))
+os_data = load_json(os.path.join(software, "OperatingSystemDetails.json"))
 functions_data = load_json(os.path.join(software, "FunctionsDetails.json"))
 
 description_data = load_json(os.path.join(general, "Description.json"))
@@ -216,64 +216,74 @@ product_name = PRODUCT_KEY
 
 
 # insert
-cursor.execute("""
-    INSERT INTO Products (
-        ProductName, Description,
-        ColorsAmount, ColorNames,
-        BatteryHours, BatteryDetails,
-        DisplayName, DisplayInches, DisplayBrightness, DisplayDetails,
-        ExternalDisplaysDetails,
-        RAM, RAMDetails,
-        Storage, StorageDetails,
-        PixelsAmount, ColorsSupported,
-        MaterialsDetails, MaterialsNames,
-        Chip, ChipDetails,
-        CameraResolution, CameraDetails,
-        SpeakersAmount,
-        AudioPlayback, AudioDetails,
-        VideoPlayback,
-        Ports, PortsAmount,
-        CablesAmount, CablesDescription,
-        DimensionsDetails,
-        EnviromentalRequirementsDetails,
-        KeyboardAndTrackpadDetails,
-        WirelessCommunicationDetails,
-        AppleIntelligence, AppleIntelligenceDetails,
-        DownloadedApps, OperatingSystem,
-        DolbyAtmos, Handoff, InstantHotspot, TouchID,
-        AvailabilityDetails, KitComponents
-    ) VALUES (
-        ?,?,  ?,?,  ?,?,  ?,?,?,?,  ?,  ?,?,  ?,?,  ?,?,  ?,?,
-        ?,?,  ?,?,  ?,  ?,?,  ?,  ?,?,  ?,?,  ?,?,?,?,  ?,?,  ?,?,  ?,?,?,?,  ?,?
-    )
-""",
-    product_name, description,
-    colors_amount, colors_names,
-    battery_hours, battery_details,
-    display_name, display_inches, display_brightness, display_details,
-    external_displays_details,
-    ram, ram_details,
-    storage, storage_details,
-    pixels_amount, colors_supported,
-    materials_details, materials_names,
-    chip_name, chip_details,
-    camera_resolution, camera_details,
-    speakers_amount,
-    audio_playback, audio_details,
-    video_playback,
-    ports, ports_amount,
-    cables_amount, cables_description,
-    dimensions_details,
-    enviroment_details,
-    keyboard_details,
-    wireless_details,
-    apple_intelligence, apple_intelligence_details,
-    downloaded_apps, operating_system,
-    1 if dolby_atmos else 0, handoff, instant_hotspot, touch_id,
-    availability_details, kit_components
+cursor.execute(
+    "SELECT 1 FROM Products WHERE ProductName = ?",
+    product_name
 )
- 
-connection.commit()
-connection.close()
 
-print(f"Product '{product_name}' successfully added to the database")
+
+if cursor.fetchone():
+  print(f"Product '{product_name}' already exists")
+else:
+  cursor.execute("""
+      INSERT INTO Products (
+          ProductName, Description,
+          ColorsAmount, ColorNames,
+          BatteryHours, BatteryDetails,
+          DisplayName, DisplayInches, DisplayBrightness, DisplayDetails,
+          ExternalDisplaysDetails,
+          RAM, RAMDetails,
+          Storage, StorageDetails,
+          PixelsAmount, ColorsSupported,
+          MaterialsDetails, MaterialsNames,
+          Chip, ChipDetails,
+          CameraResolution, CameraDetails,
+          SpeakersAmount,
+          AudioPlayback, AudioDetails,
+          VideoPlayback,
+          Ports, PortsAmount,
+          CablesAmount, CablesDescription,
+          DimensionsDetails,
+          EnviromentalRequirementsDetails,
+          KeyboardAndTrackpadDetails,
+          WirelessCommunicationDetails,
+          AppleIntelligence, AppleIntelligenceDetails,
+          DownloadedApps, OperatingSystem,
+          DolbyAtmos, Handoff, InstantHotspot, TouchID,
+          AvailabilityDetails, KitComponents
+      ) VALUES (
+          ?,?,  ?,?,  ?,?,  ?,?,?,?,  ?,  ?,?,  ?,?,  ?,?,  ?,?,
+          ?,?,  ?,?,  ?,  ?,?,  ?,  ?,?,  ?,?,  ?,?,?,?,  ?,?,  ?,?,  ?,?,?,?,  ?,?
+      )
+  """,
+      product_name, description,
+      colors_amount, colors_names,
+      battery_hours, battery_details,
+      display_name, display_inches, display_brightness, display_details,
+      external_displays_details,
+      ram, ram_details,
+      storage, storage_details,
+      pixels_amount, colors_supported,
+      materials_details, materials_names,
+      chip_name, chip_details,
+      camera_resolution, camera_details,
+      speakers_amount,
+      audio_playback, audio_details,
+      video_playback,
+      ports, ports_amount,
+      cables_amount, cables_description,
+      dimensions_details,
+      enviroment_details,
+      keyboard_details,
+      wireless_details,
+      apple_intelligence, apple_intelligence_details,
+      downloaded_apps, operating_system,
+      1 if dolby_atmos else 0, handoff, instant_hotspot, touch_id,
+      availability_details, kit_components
+  )
+  
+  connection.commit()
+
+  print(f"Product '{product_name}' successfully added to the database")
+
+connection.close()
