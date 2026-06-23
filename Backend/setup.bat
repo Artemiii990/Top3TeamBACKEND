@@ -2,7 +2,10 @@
 setlocal
 chcp 65001 > nul
 
-set SERVER=localhost\SQLEXPRESS
+set SERVER=test.c7gie2ikwu4m.eu-north-1.rds.amazonaws.com,1433
+set USERNAME=admin
+set PASSWORD=Master98766789
+
 set BACKEND=%~dp0
 
 
@@ -13,7 +16,7 @@ echo.
 
 
 echo [1/5] Creating database...
-sqlcmd -S %SERVER% -E -C -i "%BACKEND%SQL\SQLQueries\CreateDatabase.sql"
+sqlcmd -S %SERVER% -U %USERNAME% -P %PASSWORD% -C -i "%BACKEND%SQL\SQLQueries\CreateDatabase.sql"
 if errorlevel 1 (
     echo [ERROR] Failed to create database
     pause & exit /b 1
@@ -22,7 +25,7 @@ echo.
 
 
 echo [2/5] Creating Products table...
-sqlcmd -S %SERVER% -E -C -i "%BACKEND%SQL\SQLQueries\CreateProductsTable.sql"
+sqlcmd -S %SERVER% -U %USERNAME% -P %PASSWORD% -C -i "%BACKEND%SQL\SQLQueries\CreateProductsTable.sql"
 if errorlevel 1 (
     echo [ERROR] Failed to create Products table
     pause & exit /b 1
@@ -31,7 +34,7 @@ echo.
 
 
 echo [3/5] Creating Users table...
-sqlcmd -S %SERVER% -E -C -i "%BACKEND%SQL\SQLQueries\CreateUsersTable.sql"
+sqlcmd -S %SERVER% -U %USERNAME% -P %PASSWORD% -C -i "%BACKEND%SQL\SQLQueries\CreateUsersTable.sql"
 if errorlevel 1 (
     echo [ERROR] Failed to create Users table
     pause & exit /b 1

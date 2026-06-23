@@ -1,9 +1,14 @@
-# pip install pyodbc
-import pyodbc
-
 import json
-import os
+import os, sys
 import re
+
+BACKEND = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(BACKEND)
+
+from Python.sql.database import engine
+from Python.sql.tables import products
+
+from sqlalchemy import select
 
 
 
@@ -28,12 +33,6 @@ def extract_inches(text: str) -> float | None:
 def extract_pixels(text: str) -> int:
   match = re.search(r"(\d{3,})[×xх](\d{3,})", text)
   return int(match.group(1)) * int(match.group(2)) if match else 0
-
-
-
-# connection
-connection = pyodbc.connect("DRIVER={ODBC Driver 17 for SQL Server};SERVER=localhost\\SQLEXPRESS;DATABASE=AppleUADB;Trusted_Connection=YES;")
-cursor = connection.cursor()
 
 
 
@@ -216,74 +215,64 @@ product_name = PRODUCT_KEY
 
 
 # insert
-cursor.execute(
-    "SELECT 1 FROM Products WHERE ProductName = ?",
-    product_name
-)
-
-
-if cursor.fetchone():
-  print(f"Product '{product_name}' already exists")
-else:
-  cursor.execute("""
-      INSERT INTO Products (
-          ProductName, Description,
-          ColorsAmount, ColorNames,
-          BatteryHours, BatteryDetails,
-          DisplayName, DisplayInches, DisplayBrightness, DisplayDetails,
-          ExternalDisplaysDetails,
-          RAM, RAMDetails,
-          Storage, StorageDetails,
-          PixelsAmount, ColorsSupported,
-          MaterialsDetails, MaterialsNames,
-          Chip, ChipDetails,
-          CameraResolution, CameraDetails,
-          SpeakersAmount,
-          AudioPlayback, AudioDetails,
-          VideoPlayback,
-          Ports, PortsAmount,
-          CablesAmount, CablesDescription,
-          DimensionsDetails,
-          EnviromentalRequirementsDetails,
-          KeyboardAndTrackpadDetails,
-          WirelessCommunicationDetails,
-          AppleIntelligence, AppleIntelligenceDetails,
-          DownloadedApps, OperatingSystem,
-          DolbyAtmos, Handoff, InstantHotspot, TouchID,
-          AvailabilityDetails, KitComponents
-      ) VALUES (
-          ?,?,  ?,?,  ?,?,  ?,?,?,?,  ?,  ?,?,  ?,?,  ?,?,  ?,?,
-          ?,?,  ?,?,  ?,  ?,?,  ?,  ?,?,  ?,?,  ?,?,?,?,  ?,?,  ?,?,  ?,?,?,?,  ?,?
-      )
-  """,
-      product_name, description,
-      colors_amount, colors_names,
-      battery_hours, battery_details,
-      display_name, display_inches, display_brightness, display_details,
-      external_displays_details,
-      ram, ram_details,
-      storage, storage_details,
-      pixels_amount, colors_supported,
-      materials_details, materials_names,
-      chip_name, chip_details,
-      camera_resolution, camera_details,
-      speakers_amount,
-      audio_playback, audio_details,
-      video_playback,
-      ports, ports_amount,
-      cables_amount, cables_description,
-      dimensions_details,
-      enviroment_details,
-      keyboard_details,
-      wireless_details,
-      apple_intelligence, apple_intelligence_details,
-      downloaded_apps, operating_system,
-      1 if dolby_atmos else 0, handoff, instant_hotspot, touch_id,
-      availability_details, kit_components
-  )
+with engine.begin() as connection:
+  exists = connection.execute(
+    select(products.c.ProductName)
+    .where(products.c.ProductName == product_name)
+  ).first()
   
-  connection.commit()
 
-  print(f"Product '{product_name}' successfully added to the database")
-
-connection.close()
+  if exists:
+    print(f"Product '{product_name}' already exists")
+  else:
+    connection.execute(
+      products.insert().values(
+        ProductName=product_name,
+        Description=description,
+        ColorsAmount=colors_amount,
+        ColorNames=colors_names,
+        BatteryHours=battery_hours,
+        BatteryDetails=battery_details,
+        DisplayName=display_name,
+        DisplayInches=display_inches,
+        DisplayBrightness=display_brightness,
+        DisplayDetails=display_details,
+        ExternalDisplaysDetails=external_displays_details,
+        RAM=ram,
+        RAMDetails=ram_details,
+        Storage=storage,
+        StorageDetails=storage_details,
+        PixelsAmount=pixels_amount,
+        ColorsSupported=colors_supported,
+        MaterialsDetails=materials_details,
+        MaterialsNames=materials_names,
+        Chip=chip_name,
+        ChipDetails=chip_details,
+        CameraResolution=camera_resolution,
+        CameraDetails=camera_details,
+        SpeakersAmount=speakers_amount,
+        AudioPlayback=audio_playback,
+        AudioDetails=audio_details,
+        VideoPlayback=video_playback,
+        Ports=ports,
+        PortsAmount=ports_amount,
+        CablesAmount=cables_amount,
+        CablesDescription=cables_description,
+        DimensionsDetails=dimensions_details,
+        EnviromentalRequirementsDetails=enviroment_details,
+        KeyboardAndTrackpadDetails=keyboard_details,
+        WirelessCommunicationDetails=wireless_details,
+        AppleIntelligence=apple_intelligence,
+        AppleIntelligenceDetails=apple_intelligence_details,
+        DownloadedApps=downloaded_apps,
+        OperatingSystem=operating_system,
+        DolbyAtmos=1 if dolby_atmos else 0,
+        Handoff=handoff,
+        InstantHotspot=instant_hotspot,
+        TouchID=touch_id,
+        AvailabilityDetails=availability_details,
+        KitComponents=kit_components,
+      )
+    )
+    
+    print(f"Product '{product_name}' successfully added to the database")

@@ -1,13 +1,15 @@
 import sys, os
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+BACKEND = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, BACKEND)
 
 
 from sqlalchemy import insert, select
 
-from services.authentication import hash_password
+from Python.services.authentication import hash_password
 
-from sql.database import engine
-from sql.tables import users
+from Python.sql.database import engine
+from Python.sql.tables import users
 
 
 
