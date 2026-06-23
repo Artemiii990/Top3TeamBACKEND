@@ -3,12 +3,13 @@ from fastapi import Depends, APIRouter, HTTPException, status
 from dtos.products.product_user_response import *
 from services.authentication import get_current_admin
 
-from sqlalchemy import select, update
+from sqlalchemy import select, update, insert, delete
 
 from sql.database import engine
 from sql.tables import products
 
-from models.product import UpdateProduct
+from dtos.products.update_product_admin import UpdateProduct
+from dtos.products.create_product_admin import CreateProduct
 
 
 
@@ -42,9 +43,31 @@ async def get_product_by_name_admin(product_name: str):
 
 
 
+@product_router.post("/admin/products/create", tags=["Admin"], dependencies=[Depends(get_current_admin)])
+async def create_product(create_data: CreateProduct):
+  with engine.begin() as connection:
+    product = connection.execute(
+      select(products).where(products.c.ProductName == create_data.ProductName)
+    ).mappings().first()
+
+
+    if product is not None:
+      raise HTTPException(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        detail=f"Product {create_data.ProductName} already exists",
+      )
+    
+
+    connection.execute(insert(products).values(create_data.model_dump()))
+
+
+    return {"message": f"Product '{create_data.ProductName}' successfully added to database"}
+
+
+
 @product_router.patch("/admin/products/update/{product_name}", tags=["Admin"], dependencies=[Depends(get_current_admin)])
 async def update_product_by_name(product_name: str, update_data: UpdateProduct):
-  with engine.connect() as connection:
+  with engine.begin() as connection:
     product = connection.execute(
       select(products).where(products.c.ProductName == product_name)
     ).mappings().first()
@@ -69,13 +92,34 @@ async def update_product_by_name(product_name: str, update_data: UpdateProduct):
     connection.execute(
       update(products)
       .where(products.c.ProductName == product_name)
-      .values(**fields_to_update)
+      .values(fields_to_update)
     )
 
-    connection.commit()
+    return {"message": f"Product '{product_name}' updated successfully"}
 
-    return {"message": f"Product {product_name} updated successfully"}
 
+
+@product_router.delete("/admin/products/delete/{product_id}", tags=["Admin"], dependencies=[Depends(get_current_admin)])
+async def delete_product_by_id(product_id: int):
+  with engine.begin() as connection:
+    product = connection.execute(
+      select(products).where(products.c.Id == product_id)
+    ).mappings().first()
+
+
+    if product is None:
+      raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"Product #{product_id} does not exist"
+      )
+    
+
+    connection.execute(
+      delete(products).where(products.c.Id == product_id)
+    )
+
+
+    return {"message": f"Product #{product_id} deleted successfully"}
 
 
 

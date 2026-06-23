@@ -2,72 +2,74 @@ from pydantic import BaseModel
 
 
 
-class UpdateProduct(BaseModel):
-  ProductName: str | None = None
-  Description: str | None = None
+class Product(BaseModel):
+  Id: int
 
-  ColorsAmount: int | None = None
-  ColorNames: str | None = None
+  ProductName: str
+  Description: str
 
-  BatteryHours: int | None = None
-  BatteryDetails: str | None = None
+  ColorsAmount: int
+  ColorNames: str
 
-  DisplayName: str | None = None
-  DisplayInches: float | None = None
-  DisplayBrightness: int | None = None
-  DisplayDetails: str | None = None
+  BatteryHours: int
+  BatteryDetails: str
 
-  ExternalDisplaysDetails: str | None = None
+  DisplayName: str
+  DisplayInches: float
+  DisplayBrightness: int
+  DisplayDetails: str
 
-  RAM: int | None = None
-  RAMDetails: str | None = None
+  ExternalDisplaysDetails: str
 
-  Storage: int | None = None
-  StorageDetails: str | None = None
+  RAM: int
+  RAMDetails: str
 
-  PixelsAmount: int | None = None
-  ColorsSupported: int | None = None
+  Storage: int
+  StorageDetails: str
 
-  MaterialsDetails: str | None = None
-  MaterialsNames: str | None = None
+  PixelsAmount: int
+  ColorsSupported: int
 
-  Chip: str | None = None
-  ChipDetails: str | None = None
+  MaterialsDetails: str
+  MaterialsNames: str
 
-  CameraResolution: str | None = None
-  CameraDetails: str | None = None
+  Chip: str
+  ChipDetails: str
 
-  SpeakersAmount: int | None = None
+  CameraResolution: str
+  CameraDetails: str
 
-  AudioPlayback: str | None = None
-  AudioDetails: str | None = None
+  SpeakersAmount: int
 
-  VideoPlayback: str | None = None
+  AudioPlayback: str
+  AudioDetails: str
 
-  Ports: str | None = None
-  PortsAmount: int | None = None
+  VideoPlayback: str
 
-  CablesAmount: int | None = None
-  CablesDescription: str | None = None
+  Ports: str
+  PortsAmount: int
 
-  DimensionsDetails: str | None = None
+  CablesAmount: int
+  CablesDescription: str
 
-  EnviromentalRequirementsDetails: str | None = None
+  DimensionsDetails: str
 
-  KeyboardAndTrackpadDetails: str | None = None
+  EnviromentalRequirementsDetails: str
 
-  WirelessCommunicationDetails: str | None = None
+  KeyboardAndTrackpadDetails: str
 
-  AppleIntelligence: bool | None = None
-  AppleIntelligenceDetails: str | None = None
+  WirelessCommunicationDetails: str
 
-  DownloadedApps: str | None = None
-  OperatingSystem: str | None = None
+  AppleIntelligence: bool
+  AppleIntelligenceDetails: str
 
-  DolbyAtmos: bool | None = None
-  Handoff: bool | None = None
-  InstantHotspot: bool | None = None
-  TouchID: bool | None = None
+  DownloadedApps: str
+  OperatingSystem: str
 
-  AvailabilityDetails: str | None = None
-  KitComponents: str | None = None
+  DolbyAtmos: bool
+  Handoff: bool
+  InstantHotspot: bool
+  TouchID: bool
+
+  AvailabilityDetails: str
+  KitComponents: str
