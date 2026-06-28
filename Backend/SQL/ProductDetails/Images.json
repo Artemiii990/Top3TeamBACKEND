@@ -1,0 +1,23 @@
+{
+  "MacBook Neo": [""],
+
+  "iPhone 17 Pro": [""],
+
+  "iPhone": ["https://dev-applebucket.s3.eu-north-1.amazonaws.com/images/iphone.jpg"],
+
+  "AirPods Pro 3": ["https://dev-applebucket.s3.eu-north-1.amazonaws.com/images/airpods-pro.jpg"],
+
+  "AirPods Max 2": ["https://dev-applebucket.s3.eu-north-1.amazonaws.com/images/airpods.jpeg"],
+
+  "iPad Air": ["https://dev-applebucket.s3.eu-north-1.amazonaws.com/images/apple-ipad-air.jpg", "https://dev-applebucket.s3.eu-north-1.amazonaws.com/images/ipad-air.jpg"],
+
+  "iPad Pro": ["https://dev-applebucket.s3.eu-north-1.amazonaws.com/images/ipad-pro.jpg"],
+
+  "MacBook Air": ["https://dev-applebucket.s3.eu-north-1.amazonaws.com/images/macbook-air.jpg"],
+
+  "MacBook Pro": ["https://dev-applebucket.s3.eu-north-1.amazonaws.com/images/macbook-pro.jpg"],
+
+  "Watch Series 11": ["https://dev-applebucket.s3.eu-north-1.amazonaws.com/images/watch-series.jpg"],
+
+  "Watch Ultra 3": ["https://dev-applebucket.s3.eu-north-1.amazonaws.com/images/watch.jpg"]
+}

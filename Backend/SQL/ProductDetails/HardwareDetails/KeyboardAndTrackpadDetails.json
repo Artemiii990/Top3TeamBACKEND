@@ -1,20 +1,22 @@
 {
-  "Magic Keyboard": {
-    "name": "Клавіатура Magic Keyboard",
+  "MacBook Neo": {
+    "Magic Keyboard": {
+      "name": "Клавіатура Magic Keyboard",
 
-    "details": "78 (ANSI) або 79 (ISO) клавіш, включно з 12 повно­роз­мірними функціо­наль­ними клавішами",
+      "details": "78 (ANSI) або 79 (ISO) клавіш, включно з 12 повно­роз­мірними функціо­наль­ними клавішами",
 
-    "touchId": 0,
+      "touchId": 0,
 
-    "multiTouch": "Трекпед Multi-Touch для точного керування курсором і розпізна­вання жестів"
-  },
+      "multiTouch": "Трекпед Multi-Touch для точного керування курсором і розпізна­вання жестів"
+    },
 
 
-  "Magic Keyboard Touch ID": {
-    "name": "Клавіатура Magic Keyboard із Touch ID",
+    "Magic Keyboard Touch ID": {
+      "name": "Клавіатура Magic Keyboard із Touch ID",
 
-    "touchId": 1,
+      "touchId": 1,
 
-    "multiTouch": "Трекпед Multi-Touch для точного керування курсором і розпізна­вання жестів"
+      "multiTouch": "Трекпед Multi-Touch для точного керування курсором і розпізна­вання жестів"
+    }
   }
 }

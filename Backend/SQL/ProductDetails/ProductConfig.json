@@ -1,0 +1,13 @@
+{
+  "MacBook Neo": {
+    "chip": "A18 Pro",
+    
+    "display": "Liquid Retina",
+
+    "ram": "8 GB",
+
+    "storage": "256 GB",
+
+    "cameraResolution": "FaceTime HD 1080p"
+  }
+}

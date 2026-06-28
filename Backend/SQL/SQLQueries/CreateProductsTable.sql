@@ -73,5 +73,8 @@ CREATE TABLE Products
 
 
     AvailabilityDetails NVARCHAR(MAX) NULL,
-    KitComponents NVARCHAR(MAX) NULL
+    KitComponents NVARCHAR(MAX) NULL,
+
+
+    Images NVARCHAR(MAX) NOT NULL
 );
