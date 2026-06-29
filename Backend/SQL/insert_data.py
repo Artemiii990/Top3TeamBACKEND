@@ -56,7 +56,6 @@ chip_data = load_json(os.path.join(hardware, "ChipDetails.json"))
 display_data = load_json(os.path.join(hardware_display, "DisplayDetails.json"))
 ram_data = load_json(os.path.join(hardware_memory, "RAMDetails.json"))
 storage_data = load_json(os.path.join(hardware_memory, "StorageDetails.json"))
-camera_data = load_json(os.path.join(hardware, "CameraDetails.json"))
 
 audio_data = load_json(os.path.join(hardware, "AudioDetails.json"))
 ports_data = load_json(os.path.join(hardware_battery, "ChargingAndConnection.json"))
@@ -65,14 +64,15 @@ wireless_data = load_json(os.path.join(hardware, "WirelessCommunicationDetails.j
 external_displays_data = load_json(os.path.join(hardware_display, "ExternalDisplaysDetails.json"))
 
 battery_data = load_json(os.path.join(hardware_battery, "BatteryDetails.json"))
-dimensions_data = load_json(os.path.join(hardware, "DimensionsAndWeightDetails.json"))
-enviromental_data = load_json(os.path.join(hardware, "EnviromentalRequirementsDetails.json"))
+dimensions_data = load_json(os.path.join(general, "DimensionsAndWeightDetails.json"))
+enviromental_data = load_json(os.path.join(general, "EnviromentalRequirementsDetails.json"))
 functions_data = load_json(os.path.join(software, "FunctionsDetails.json"))
 description_data = load_json(os.path.join(general, "Description.json"))
 availability_data = load_json(os.path.join(general, "AvailabilityDetails.json"))
 kit_data = load_json(os.path.join(general, "KitComponentsDetails.json"))
 color_data = load_json(os.path.join(general, "ColorsDetails.json"))
 materials_data = load_json(os.path.join(general, "MaterialDetails.json"))
+camera_data = load_json(os.path.join(hardware, "CameraDetails.json"))
 
 audio_playback_data = load_json(os.path.join(hardware_playback, "AudioPlayback.json"))
 video_playback_data = load_json(os.path.join(hardware_playback, "VideoPlayback.json"))
@@ -129,7 +129,7 @@ def seed_product(product_key: str):
 
   # camera
   camera_resolution = config["cameraResolution"]
-  camera_details = json_to_str(camera_data)
+  camera_details = json_to_str(camera_data[product_key])
 
 
   # audio

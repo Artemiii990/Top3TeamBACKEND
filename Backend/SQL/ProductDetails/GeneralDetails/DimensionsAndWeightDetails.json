@@ -1,0 +1,22 @@
+{
+  "MacBook Neo": {
+    "length": "29,75 см",
+
+    "width": "20,64 см",
+
+    "thickness": "1,27 см",
+
+    "weight": "1,23 кг"
+  },
+
+
+  "iPhone 17 Pro": {
+    "length": "150 мм",
+
+    "width": "71,9 мм",
+
+    "thickness": "8,75 мм",
+
+    "weight": "204 г"
+  }
+}
