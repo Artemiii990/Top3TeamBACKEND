@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from Backend.Python.monolith.routers.authentication_router import authentication_router
-from Backend.Python.monolith.routers.product_router import product_router
+from Backend.Python.Monolith.routers.authentication_router import authentication_router
+from Backend.Python.Monolith.routers.product_router import product_router
 
 
 

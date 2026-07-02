@@ -21,7 +21,7 @@ product_router = APIRouter()
 
 
 
-# ========== Admin =========
+# ========== Admin ==========
 
 @product_router.get("/admin/products/get", tags=["Admin"], dependencies=[Depends(get_current_admin)])
 async def get_products_admin():
@@ -120,6 +120,7 @@ async def delete_product_by_id(product_id: int):
 
 
     return {"message": f"Product #{product_id} deleted successfully"}
+
 
 
 
