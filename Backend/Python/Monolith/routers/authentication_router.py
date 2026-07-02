@@ -1,13 +1,13 @@
 from fastapi import APIRouter, HTTPException, status
 from sqlalchemy import select
 
-from dtos.authentication.token_response import Token
-from dtos.authentication.input_dto import UserLogin
+from Backend.Python.Monolith.dtos.authentication.token_response import Token
+from Backend.Python.Monolith.dtos.authentication.input_dto import UserLogin
 
-from services.authentication import verify_password, create_access_token
+from Backend.Python.Monolith.services.authentication import verify_password, create_access_token
 
-from sql.database import engine
-from sql.tables import users
+from Backend.Python.Monolith.sql.database import engine
+from Backend.Python.Monolith.sql.tables import users
 
 
 

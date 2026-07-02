@@ -1,15 +1,15 @@
 from fastapi import Depends, APIRouter, HTTPException, status
 
-from dtos.products.product_user_response import *
-from services.authentication import get_current_admin
+from Backend.Python.Monolith.dtos.products.product_user_response import *
+from Backend.Python.Monolith.services.authentication import get_current_admin
 
 from sqlalchemy import select, update, insert, delete
 
-from sql.database import engine
-from sql.tables import products
+from Backend.Python.Monolith.sql.database import engine
+from Backend.Python.Monolith.sql.tables import products
 
-from dtos.products.update_product_admin import UpdateProduct
-from dtos.products.create_product_admin import CreateProduct
+from Backend.Python.Monolith.dtos.products.update_product_admin import UpdateProduct
+from Backend.Python.Monolith.dtos.products.create_product_admin import CreateProduct
 
 
 

@@ -5,8 +5,8 @@ import re
 BACKEND = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BACKEND)
 
-from Python.sql.database import engine
-from Python.sql.tables import products
+from Backend.Python.monolith.sql.database import engine
+from Backend.Python.monolith.sql.tables import products
 
 from sqlalchemy import select
 

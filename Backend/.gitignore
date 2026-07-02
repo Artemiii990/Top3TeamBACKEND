@@ -26,3 +26,6 @@ htmlcov/
 
 # mypy
 .mypy_cache/
+
+# .env sensitive information
+.env

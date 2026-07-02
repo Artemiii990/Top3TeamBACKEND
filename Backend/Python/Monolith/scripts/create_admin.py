@@ -6,10 +6,10 @@ sys.path.insert(0, BACKEND)
 
 from sqlalchemy import insert, select
 
-from Python.services.authentication import hash_password
+from Backend.Python.monolith.services.authentication import hash_password
 
-from Python.sql.database import engine
-from Python.sql.tables import users
+from Backend.Python.monolith.sql.database import engine
+from Backend.Python.monolith.sql.tables import users
 
 
 

@@ -1,5 +1,5 @@
 from sqlalchemy import Table
-from sql.database import engine, metadata
+from Backend.Python.monolith.sql.database import engine, metadata
 
 
 
