@@ -117,3 +117,20 @@ async def verify(token: Token):
     return {"valid": True, "username": payload["sub"]}
   except JWTError:
     raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
+
+
+
+@app.post("/authentication-service/users")
+def get_users(db: Session = Depends(get_db)):
+  return db.scalars(select(User)).all()
+
+
+
+@app.post("/authentication-service/users/{username}")
+def get_user_by_username(username: str, db: Session = Depends(get_db)):
+  user = db.scalar(select(User).where(User.Username == username))
+
+  if not user: raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+
+
+  return user

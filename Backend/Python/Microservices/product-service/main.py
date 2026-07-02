@@ -42,7 +42,7 @@ bearer_scheme = HTTPBearer()
 async def get_current_admin(credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme)) -> str:
   async with httpx.AsyncClient() as client:
     try:
-      response = await client.post(f"{AUTHENTICATION_SERVICE_URL}/authentication-service/verify", json={"token": credentials.credentials})
+      response = await client.post(f"{AUTHENTICATION_SERVICE_URL}/authentication-service/verify", json={"access_token": credentials.credentials})
     
     except httpx.ConnectError:
       raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail="Authentication service is unavailable")
